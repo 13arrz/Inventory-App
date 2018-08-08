@@ -8,7 +8,8 @@ export default class CreateProfileScreen extends React.Component {
 		
 		this.state = {
 			profileName: null,
-			profiles: this.props.navigation.getParam('profiles', null)
+			profiles: this.props.navigation.getParam('profiles', null),
+			error: null
 		}
 	}
 	
@@ -17,7 +18,32 @@ export default class CreateProfileScreen extends React.Component {
 		const newProfile = this.state.profileName;
 		var profiles = this.state.profiles
 		
+		var failure = false;
+		
+		// check to make sure the user entered a profile name
+		if (newProfile === null || newProfile === "") {
+			this.setState({
+				error: "Please enter a profile name."
+			});
+			
+			failure = true;
+		}
+		
 		if (profiles != null) {
+			// check to make sure the profile name isn't taken
+			Object.keys(profiles).forEach(function(key) {
+				if (key === newProfile) {
+					this.setState({
+						error: "Profile \'" + newProfile + "\' already exists!"
+					});
+					
+					failure = true;
+				}
+			}.bind(this))
+			
+			// if any of the error checks failed, do not save the new profile
+			if (failure) return null;
+			
 			// update the profile list
 			profiles[newProfile] = {
 				"items": {
@@ -36,6 +62,7 @@ export default class CreateProfileScreen extends React.Component {
 		// save the updated profile list
 		AsyncStorage.setItem('profiles', JSON.stringify(profiles)).then(() => {
 			// navigate to profile screen
+			console.log("Created new profile");
 			this.props.navigation.navigate("ProfileListScreen", { profiles });
 		})
 	}
@@ -48,6 +75,9 @@ export default class CreateProfileScreen extends React.Component {
 			/>
 			
 				<KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+					{this.state.error &&
+						<Text style={{color: 'red', fontSize: 16}}>{this.state.error}</Text>
+					}
 					<Text>Enter new profile name:</Text>
 					<TextInput
 						style={styles.textInput}
