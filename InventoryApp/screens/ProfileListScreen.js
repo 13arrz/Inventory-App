@@ -57,6 +57,11 @@ export default class ProfileListScreen extends React.Component {
 					<TouchableOpacity style={styles.profileButton}
 						onPress={() => {
 							// navigate to the relevant profile
+							this.state.navigation.navigate("ProfileScreen", 
+								{
+									profiles: this.state.profiles, 
+									curProfile: item["profile"]
+								})
 						}}>
 						<Text style={styles.profileText}>{item["profile"]}</Text>
 					</TouchableOpacity>
