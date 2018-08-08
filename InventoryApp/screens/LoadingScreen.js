@@ -10,6 +10,7 @@ export default class LoadingScreen extends React.Component {
 			if (profiles != null) {
 				// if so, send the user to the profile list
 				// pass in the read profile list for reading/modification
+				profiles = JSON.parse(profiles);
 				this.props.navigation.navigate("ProfileListScreen", { profiles });
 			} else {
 				// if not, send the user to create a new profile
