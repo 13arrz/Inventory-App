@@ -7,6 +7,7 @@ export default class ProfileListScreen extends React.Component {
 		super(props);
 		
 		this.state = {
+			navigation: this.props.navigation,
 			profiles: this.props.navigation.getParam('profiles'),
 			profileList: []
 		}
@@ -29,6 +30,11 @@ export default class ProfileListScreen extends React.Component {
 		return(
 			<View>
 				<Header
+					leftComponent={{icon: 'add', color: '#fff', onPress: () => {
+						// allow the user to add a new profile
+						// pass in the current profile list as a param
+						this.state.navigation.navigate("CreateProfileScreen", {profiles: this.state.profiles});
+					}}}
 					centerComponent={{text: 'Profiles', style:{color: '#fff'}}}
 				/>
 				

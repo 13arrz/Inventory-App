@@ -8,17 +8,7 @@ export default class CreateProfileScreen extends React.Component {
 		
 		this.state = {
 			profileName: null,
-			profiles: null
-		}
-	}
-	
-	async componentWillMount() {
-		// load user profiles into state
-		try {
-			var profiles = await AsyncStorage.getItem('profiles');
-			profiles = JSON.parse(profiles);
-			this.setState(profiles);
-		} catch(e) {
+			profiles: this.props.navigation.getParam('profiles', null)
 		}
 	}
 	
