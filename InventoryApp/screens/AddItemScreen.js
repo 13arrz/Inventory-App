@@ -20,7 +20,16 @@ export default class AddItemScreen extends React.Component {
 		var newProfiles = this.state.profiles;
 		
 		// error checking
+		if (this.state.itemName === null || this.state.itemName === "") {
+			this.setState({error: "Please enter an item name."});
+			return null;
+		}
 		
+		if (this.state.itemQuantity === null || this.state.itemQuantity === "" ||
+			isNaN(this.state.itemQuantity)) {
+			this.setState({error: "Please enter a numeric item quantity."});
+			return null;
+		}
 		// ======
 		
 		// update the profile list with the new item and quantity
@@ -56,6 +65,7 @@ export default class AddItemScreen extends React.Component {
 						<Text style={{color: 'red', fontSize: 16}}>{this.state.error}</Text>
 					}
 					<Text>Enter new item name:</Text>
+					<Text>(Entering an existing item will update that item's quantity)</Text>
 					<TextInput
 						style={styles.textInput}
 						onChangeText={(itemName) => this.setState({itemName})}
@@ -93,7 +103,8 @@ const styles = StyleSheet.create({
 		opacity: .9,
 		borderColor: 'gray',
 		borderWidth: 1,
-		marginTop: 10
+		marginTop: 10,
+		marginBottom: 20
 	},
 	submitButton: {
 		backgroundColor: 'lightblue',
