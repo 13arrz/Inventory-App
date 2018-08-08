@@ -9,7 +9,7 @@ export default class LoadingScreen extends React.Component {
 			
 			if (profiles != null) {
 				// if so, send the user to the profile list
-				
+				this.props.navigation.navigate("ProfileListScreen");
 			} else {
 				// if not, send the user to create a new profile
 				this.props.navigation.navigate("CreateProfileScreen");

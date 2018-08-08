@@ -6,12 +6,14 @@ import { createSwitchNavigator } from 'react-navigation';
 import LoadingScreen from './screens/LoadingScreen.js';
 import ProfileScreen from './screens/ProfileScreen.js';
 import CreateProfileScreen from './screens/CreateProfileScreen.js';
+import ProfileListScreen from './screens/ProfileListScreen.js';
 
 const App = createSwitchNavigator(
 	{
 		LoadingScreen,
 		ProfileScreen,
-		CreateProfileScreen
+		CreateProfileScreen,
+		ProfileListScreen
 	},
 	{
 		initialRouteName: 'LoadingScreen'

@@ -47,7 +47,7 @@ export default class CreateProfileScreen extends React.Component {
 		// save the updated profile list
 		AsyncStorage.setItem('profiles', JSON.stringify(profiles)).then(() => {
 			// navigate to profile screen
-			this.props.navigation.navigate("ProfileScreen");
+			this.props.navigation.navigate("ProfileListScreen");
 		})
 	}
 	
