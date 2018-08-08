@@ -31,6 +31,8 @@ export default class ProfileScreen extends React.Component {
 				
 			this.setState({profiles: newProfiles});
 			
+			AsyncStorage.setItem('profiles', JSON.stringify(this.state.profiles));
+			
 			return newCount;
 		} else {
 			return "0";
@@ -50,6 +52,8 @@ export default class ProfileScreen extends React.Component {
 			newCount;
 				
 		this.setState({profiles: newProfiles});
+		
+		AsyncStorage.setItem('profiles', JSON.stringify(this.state.profiles));
 			
 		return newCount;
 	}
