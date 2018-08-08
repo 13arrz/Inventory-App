@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, AsyncStorage, Alert } from 'react-native';
+import { StyleSheet, View, FlatList, AsyncStorage, Alert, Text } from 'react-native';
 import { Header } from 'react-native-elements';
+
+import ItemComponent from '../ItemComponent.js';
 
 export default class ProfileScreen extends React.Component {
 	constructor(props) {
@@ -77,8 +79,27 @@ export default class ProfileScreen extends React.Component {
 					}}}
 				/>
 				
-				
+				<FlatList
+					data={this.state.itemList}
+					renderItem={({item}) => (
+						<ItemComponent
+							name={item.name}
+							count={item.count}
+						/>
+					)}
+					keyExtractor={(item, index)=> "$" + index}
+					ItemSeparatorComponent={() => (
+						<View style={styles.itemSeparator} />
+					)}
+				/>
 			</View>
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+	itemSeparator: {
+		backgroundColor: 'gray',
+		height: 2
+	}
+})

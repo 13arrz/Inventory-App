@@ -11,12 +11,14 @@ export default class ItemComponent extends React.Component {
 			/*addFunc: props.addFunc,
 			subFunc: props.subFunc*/
 		}
+		
+		console.log(this.state.name);
 	}
 	
 	render() {
 		return (
 			<TouchableOpacity style={styles.itemButton}>
-				<Text>({this.state.count}) {this.state.name}<Text>
+				<Text style={styles.itemText}>({this.state.count}) {this.state.name}</Text>
 			</TouchableOpacity>
 		)
 	}
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'lightblue'
 	},
 	itemText: {
-		fontSize: 18,
+		fontSize: 20,
 		color: 'black',
 		marginLeft: 20,
 		marginTop: 20,
