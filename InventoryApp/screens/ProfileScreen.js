@@ -9,10 +9,28 @@ export default class ProfileScreen extends React.Component {
 		this.state = {
 			navigation: this.props.navigation,
 			profiles: this.props.navigation.getParam('profiles', null),
-			curProfile: this.props.navigation.getParam('curProfile', null)
+			curProfile: this.props.navigation.getParam('curProfile', null),
+			itemList: []
 		}
+	}
+	
+	componentDidMount() {
+		const profiles = this.state.profiles;
+		const curProfile = this.state.curProfile;
 		
-		console.log(this.state.profiles);
+		// add all profile items to state itemList
+		var newItemList = []
+		
+		Object.keys(profiles[curProfile]["items"]).forEach(function(item) {
+			newItemList.push({
+				name: item,
+				count: profiles[curProfile]["items"][item]
+			})
+		});
+		
+		this.setState({
+			itemList: newItemList
+		});
 	}
 	
 	/*
@@ -58,6 +76,8 @@ export default class ProfileScreen extends React.Component {
 						)
 					}}}
 				/>
+				
+				
 			</View>
 		)
 	}
