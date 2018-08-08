@@ -8,11 +8,9 @@ export default class ItemComponent extends React.Component {
 		this.state = {
 			name: props.name,
 			count: props.count,
-			/*addFunc: props.addFunc,
-			subFunc: props.subFunc*/
+			subFunc: props.subFunc,
+			addFunc: props.addFunc
 		}
-		
-		console.log(this.state.name);
 	}
 	
 	render() {
@@ -20,10 +18,14 @@ export default class ItemComponent extends React.Component {
 			<TouchableOpacity style={styles.itemButton}>
 				<Text style={styles.itemText}>({this.state.count}) {this.state.name}</Text>
 				<View style={styles.spacerView}>
-					<TouchableOpacity style={styles.subButton}>
+					<TouchableOpacity style={styles.subButton} onPress={() => {
+							this.setState({count: this.state.subFunc()})
+						}}>
 						<Text style={styles.incText}>-</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.addButton}>
+					<TouchableOpacity style={styles.addButton} onPress={() => {
+							this.setState({count: this.state.addFunc()})
+						}}>
 						<Text style={styles.incText}>+</Text>
 					</TouchableOpacity>
 				</View>

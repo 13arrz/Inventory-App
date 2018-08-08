@@ -16,6 +16,44 @@ export default class ProfileScreen extends React.Component {
 		}
 	}
 	
+	/*
+	 * Subtract quantity from a specific item.
+	 */
+	subCount = (item, count) => {
+		if (count > 0) {
+			var newProfiles = this.state.profiles;
+			const curProfile = this.state.curProfile;
+			
+			var newCount = "" + (parseInt(count, 10) - 1);
+			
+			newProfiles[curProfile]["items"][item] = 
+				newCount;
+				
+			this.setState({profiles: newProfiles});
+			
+			return newCount;
+		} else {
+			return "0";
+		}
+	}
+	
+	/*
+	 * Add quantity to a specific item.
+	 */
+	addCount = (item, count) => {
+		var newProfiles = this.state.profiles;
+		const curProfile = this.state.curProfile;
+			
+		var newCount = "" + (parseInt(count, 10) + 1);
+			
+		newProfiles[curProfile]["items"][item] = 
+			newCount;
+				
+		this.setState({profiles: newProfiles});
+			
+		return newCount;
+	}
+	
 	componentDidMount() {
 		const profiles = this.state.profiles;
 		const curProfile = this.state.curProfile;
@@ -85,6 +123,10 @@ export default class ProfileScreen extends React.Component {
 						<ItemComponent
 							name={item.name}
 							count={item.count}
+							subFunc={() => this.subCount(item.name, 
+								this.state.profiles[this.state.curProfile]["items"][item.name])}
+							addFunc={() => this.addCount(item.name,
+								this.state.profiles[this.state.curProfile]["items"][item.name])}
 						/>
 					)}
 					keyExtractor={(item, index)=> "$" + index}
