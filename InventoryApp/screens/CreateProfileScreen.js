@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-native-elements';
 
 export default class CreateProfileScreen extends React.Component {
@@ -47,20 +47,20 @@ export default class CreateProfileScreen extends React.Component {
 				centerComponent={{text: 'Create Profile', style: {color: '#fff'}}}
 			/>
 			
-			<View style={styles.container}>
-				<Text>Enter new profile name:</Text>
-				<TextInput
-					style={styles.textInput}
-					onChangeText={(profileName) => this.setState({profileName})}
-					value={this.state.profileName}
-				/>
-				<TouchableOpacity
-					style={styles.submitButton}
-					onPress={this.createProfile}
-				>
-					<Text>Create</Text>
-				</TouchableOpacity>
-			</View>
+				<KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+					<Text>Enter new profile name:</Text>
+					<TextInput
+						style={styles.textInput}
+						onChangeText={(profileName) => this.setState({profileName})}
+						value={this.state.profileName}
+					/>
+					<TouchableOpacity
+						style={styles.submitButton}
+						onPress={this.createProfile}
+					>
+						<Text>Create</Text>
+					</TouchableOpacity>
+				</KeyboardAvoidingView>
 			</View>
 		)
 	}
