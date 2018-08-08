@@ -1,17 +1,54 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 
 export default class CreateProfileScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		
 		this.state = {
-			profileName: null
+			profileName: null,
+			profiles: null
+		}
+	}
+	
+	async componentWillMount() {
+		// load user profiles into state
+		try {
+			var profiles = await AsyncStorage.getItem('profiles');
+			profiles = JSON.parse(profiles);
+			this.setState(profiles);
+			
+			console.log("Profiles: " + this.state.profiles)
+		} catch(e) {
 		}
 	}
 	
 	createProfile = () => {
-		console.log("Create new profile");
+		// add the new profile to the previously read list
+		const newProfile = this.state.profileName;
+		var profiles = this.state.profiles
+		
+		if (profiles != null) {
+			// update the profile list
+			profiles[newProfile] = {
+				"items": {
+				}
+			}
+		} else {
+			// there are no profiles, so create a new list
+			profiles = {
+				newProfile: {
+					"items": {
+					}
+				}
+			}
+		}
+		
+		// save the updated profile list
+		AsyncStorage.setItem('profiles', JSON.stringify(profiles)).then(() => {
+			// navigate to profile screen
+			this.props.navigation.navigate("ProfileScreen");
+		})
 	}
 	
 	render() {
