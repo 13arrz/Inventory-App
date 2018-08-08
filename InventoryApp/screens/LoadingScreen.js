@@ -1,11 +1,23 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet, AsyncStorage } from 'react-native';
 
 export default class LoadingScreen extends React.Component {
-	componentDidMount() {
+	async componentDidMount() {
 		// determine whether there are profiles saved or not
-		// if so, send the user to the profiles screen
-		// if not, send the user to create a new profile
+		try {
+			const profiles = await AsyncStorage.getItem('profiles');
+			
+			if (profiles != null) {
+				// if so, send the user to the profile list
+				
+			} else {
+				// if not, send the user to create a new profile
+				this.props.navigation.navigate("CreateProfileScreen");
+			}
+		} catch (error) {
+			// error retrieving data
+			console.error(error);
+		}
 	}
 	
 	render() {
