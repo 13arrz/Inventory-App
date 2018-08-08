@@ -6,13 +6,18 @@ export default class ItemComponent extends React.Component {
 		super(props);
 		
 		this.state = {
-		
+			name: props.name,
+			count: props.count,
+			/*addFunc: props.addFunc,
+			subFunc: props.subFunc*/
 		}
 	}
 	
 	render() {
 		return (
-		
+			<TouchableOpacity style={styles.itemButton}>
+				<Text>({this.state.count}) {this.state.name}<Text>
+			</TouchableOpacity>
 		)
 	}
 }
