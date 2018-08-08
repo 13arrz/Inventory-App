@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert, AsyncStorage } from 'react-native';
 import { Header } from 'react-native-elements';
 
 export default class ProfileListScreen extends React.Component {
@@ -36,6 +36,19 @@ export default class ProfileListScreen extends React.Component {
 						this.state.navigation.navigate("CreateProfileScreen", {profiles: this.state.profiles});
 					}}}
 					centerComponent={{text: 'Profiles', style:{color: '#fff'}}}
+					rightComponent={{icon: 'settings', color: '#fff', onPress: () => {
+						Alert.alert(
+							'InventoryApp',
+							'Options',
+							[
+							{text: 'Erase All Profiles', onPress: () => {
+								// erase all profiles and navigate to the loading screen
+								AsyncStorage.removeItem('profiles', () => 
+									this.state.navigation.navigate("LoadingScreen"));
+							}}
+							]
+						)
+					}}}
 				/>
 				
 				<FlatList
