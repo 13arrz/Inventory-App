@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { Header } from 'react-native-elements';
 
 export default class ProfileListScreen extends React.Component {
 	constructor(props) {
@@ -27,6 +28,10 @@ export default class ProfileListScreen extends React.Component {
 	render() {
 		return(
 			<View>
+				<Header
+					centerComponent={{text: 'Profiles', style:{color: '#fff'}}}
+				/>
+				
 				<FlatList
 					data={this.state.profileList}
 					renderItem={({item})=>

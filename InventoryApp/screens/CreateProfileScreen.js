@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Header } from 'react-native-elements';
 
 export default class CreateProfileScreen extends React.Component {
 	constructor(props) {
@@ -17,8 +18,6 @@ export default class CreateProfileScreen extends React.Component {
 			var profiles = await AsyncStorage.getItem('profiles');
 			profiles = JSON.parse(profiles);
 			this.setState(profiles);
-			
-			console.log("Profiles: " + this.state.profiles)
 		} catch(e) {
 		}
 	}
@@ -47,12 +46,17 @@ export default class CreateProfileScreen extends React.Component {
 		// save the updated profile list
 		AsyncStorage.setItem('profiles', JSON.stringify(profiles)).then(() => {
 			// navigate to profile screen
-			this.props.navigation.navigate("ProfileListScreen");
+			this.props.navigation.navigate("ProfileListScreen", { profiles });
 		})
 	}
 	
 	render() {
 		return (
+			<View style={{flex: 1}}>
+			<Header
+				centerComponent={{text: 'Create Profile', style: {color: '#fff'}}}
+			/>
+			
 			<View style={styles.container}>
 				<Text>Enter new profile name:</Text>
 				<TextInput
@@ -66,6 +70,7 @@ export default class CreateProfileScreen extends React.Component {
 				>
 					<Text>Create</Text>
 				</TouchableOpacity>
+			</View>
 			</View>
 		)
 	}
