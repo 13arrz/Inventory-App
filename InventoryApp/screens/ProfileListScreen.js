@@ -6,8 +6,13 @@ export default class ProfileListScreen extends React.Component {
 		super(props);
 		
 		this.state = {
-			profiles: null
+			profiles: this.props.navigation.getParam('profiles')
 		}
+	}
+	
+	async componentDidMount() {
+		// load user profiles into component state
+		console.log(this.state.profiles);
 	}
 	
 	render() {

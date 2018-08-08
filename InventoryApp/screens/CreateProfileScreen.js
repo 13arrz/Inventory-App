@@ -36,12 +36,12 @@ export default class CreateProfileScreen extends React.Component {
 			}
 		} else {
 			// there are no profiles, so create a new list
-			profiles = {
-				newProfile: {
+			profiles = {}
+			profiles[newProfile] = 
+				{
 					"items": {
 					}
 				}
-			}
 		}
 		
 		// save the updated profile list
