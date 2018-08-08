@@ -44,6 +44,13 @@ export default class ProfileScreen extends React.Component {
 									// navigate to the loading screen, because the user may have
 									// deleted their last profile and it's better to know explicitly
 									this.saveProfilesAndExit("LoadingScreen");
+								}},
+								{text: 'Add Item', onPress: () => {
+									this.state.navigation.navigate("AddItemScreen",
+									{
+										profiles: this.state.profiles,
+										curProfile: this.state.curProfile
+									})
 								}}
 							]
 						)
