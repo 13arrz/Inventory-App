@@ -50,6 +50,9 @@ export default class CreateProfileScreen extends React.Component {
 				}
 			}
 		} else {
+			// if any of the error checks failed, do not save the new profile
+			if (failure) return null;
+			
 			// there are no profiles, so create a new list
 			profiles = {}
 			profiles[newProfile] = 
@@ -71,6 +74,16 @@ export default class CreateProfileScreen extends React.Component {
 		return (
 			<View style={{flex: 1}}>
 			<Header
+				leftComponent={{icon: 'keyboard-arrow-left', color: '#fff', onPress: () => {
+					if (this.state.profiles === null) {
+						// do not allow the user to navigate back if they
+						// haven't created at least one profile
+						this.setState({error: "Please create a default profile first."});
+					} else {
+						// cancel the request to add a new profile
+						this.props.navigation.navigate("ProfileListScreen", { profiles: this.state.profiles });
+					}
+				}}}
 				centerComponent={{text: 'Create Profile', style: {color: '#fff'}}}
 			/>
 			
