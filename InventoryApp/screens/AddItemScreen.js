@@ -23,7 +23,17 @@ export default class AddItemScreen extends React.Component {
 		
 		// ======
 		
+		// update the profile list with the new item and quantity
+		newProfiles[this.state.curProfile]["items"][this.state.itemName] = parseInt(this.state.itemQuantity, 10);
 		
+		// save the new profile list and return to ProfileScreen
+		AsyncStorage.setItem('profiles', JSON.stringify(newProfiles)).then(() => {
+			this.state.navigation.navigate("ProfileScreen", 
+			{
+				profiles: newProfiles,
+				curProfile: this.state.curProfile
+			})
+		})
 	}
 	
 	render() {

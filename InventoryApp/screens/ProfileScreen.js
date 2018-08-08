@@ -11,6 +11,8 @@ export default class ProfileScreen extends React.Component {
 			profiles: this.props.navigation.getParam('profiles', null),
 			curProfile: this.props.navigation.getParam('curProfile', null)
 		}
+		
+		console.log(this.state.profiles);
 	}
 	
 	/*
