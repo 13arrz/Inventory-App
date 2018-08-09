@@ -1,3 +1,10 @@
+/*
+ * This component displays a single item in a profile's item list. The user may
+ * use the - and + buttons to subtract from or add to the quantity of the item,
+ * or they may tap on the component itself to have to option of deleting the
+ * item from this profile.
+ */
+
 import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, Alert } from 'react-native';
 

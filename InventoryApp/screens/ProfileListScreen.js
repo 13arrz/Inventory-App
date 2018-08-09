@@ -1,3 +1,9 @@
+/*
+ * This screen lists all the profiles the user has created. The user can
+ * choose to create new profiles, or select an existing profile to navigate
+ * to it and view that profile's items.
+ */
+
 import React from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert, AsyncStorage } from 'react-native';
 import { Header } from 'react-native-elements';

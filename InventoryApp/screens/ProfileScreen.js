@@ -1,3 +1,9 @@
+/*
+ * This is the view screen for a single profile. It lists all the items the
+ * user has added to the profile. The user may add more items, delete existing
+ * items, or delete the entire profile.
+ */
+
 import React from 'react';
 import { StyleSheet, View, FlatList, AsyncStorage, Alert, Text } from 'react-native';
 import { Header } from 'react-native-elements';

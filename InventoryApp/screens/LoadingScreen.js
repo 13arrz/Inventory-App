@@ -1,3 +1,12 @@
+/*
+ * This screen loads the user's saved profile list and navigates according to
+ * whether a profile list has been saved.
+ * If there is a saved profile list, the user is navigated to view all of their
+ * profiles.
+ * If there is no saved profile list, the user is navigated to create a new
+ * profile.
+ */
+
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, AsyncStorage } from 'react-native';
 

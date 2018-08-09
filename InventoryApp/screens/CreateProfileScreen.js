@@ -1,3 +1,9 @@
+/*
+ * This is the first screen the user will see when they first open the app
+ * (after the loading screen). They are required to create at least one
+ * profile, and this profile must have a name.
+ */
+
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-native-elements';

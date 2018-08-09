@@ -1,3 +1,9 @@
+/*
+ * This screen is used to add new items to an existing profile. The user must
+ * enter a name for the item, and must also enter an initial quantity for the
+ * item (which can be 0).
+ */
+
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-native-elements';
