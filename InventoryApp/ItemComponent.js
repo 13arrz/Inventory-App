@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, Alert } from 'react-native';
 
 export default class ItemComponent extends React.Component {
 	constructor(props) {
@@ -9,13 +9,22 @@ export default class ItemComponent extends React.Component {
 			name: props.name,
 			count: props.count,
 			subFunc: props.subFunc,
-			addFunc: props.addFunc
+			addFunc: props.addFunc,
+			delFunc: props.delFunc
 		}
 	}
 	
 	render() {
 		return (
-			<TouchableOpacity style={styles.itemButton}>
+			<TouchableOpacity style={styles.itemButton} onPress={() => {
+				Alert.alert(
+					'InventoryApp',
+					'Delete Item \'' + this.state.name + '\'?',
+					[
+					{text: 'Delete', onPress: () => this.state.delFunc()}
+					]
+				)
+				}}>
 				<Text style={styles.itemText}>({this.state.count}) {this.state.name}</Text>
 				<View style={styles.spacerView}>
 					<TouchableOpacity style={styles.subButton} onPress={() => {

@@ -17,6 +17,27 @@ export default class ProfileScreen extends React.Component {
 	}
 	
 	/*
+	 * Update the state's itemList so that items in the profile are listed
+	 * correctly.
+	 * This method basically extracts the item names as keys from the profile.
+	 */
+	refreshItemList = (profiles) => {
+		const curProfile = this.state.curProfile;
+		
+		// add all profile items to state itemList
+		var newItemList = []
+		
+		Object.keys(profiles[curProfile]["items"]).forEach(function(item) {
+			newItemList.push({
+				name: item,
+				count: profiles[curProfile]["items"][item]
+			})
+		});
+		
+		this.setState({itemList: newItemList});
+	}
+	
+	/*
 	 * Subtract quantity from a specific item.
 	 */
 	subCount = (item, count) => {
@@ -31,6 +52,7 @@ export default class ProfileScreen extends React.Component {
 				
 			this.setState({profiles: newProfiles});
 			
+			// save the updated profile list
 			AsyncStorage.setItem('profiles', JSON.stringify(this.state.profiles));
 			
 			return newCount;
@@ -53,28 +75,29 @@ export default class ProfileScreen extends React.Component {
 				
 		this.setState({profiles: newProfiles});
 		
+		// save the updated profile list
 		AsyncStorage.setItem('profiles', JSON.stringify(this.state.profiles));
 			
 		return newCount;
 	}
 	
-	componentDidMount() {
-		const profiles = this.state.profiles;
-		const curProfile = this.state.curProfile;
+	deleteItem = (item) => {
+		var newProfiles = this.state.profiles;
 		
-		// add all profile items to state itemList
-		var newItemList = []
+		// delete the specified item from the profile list
+		delete newProfiles[this.state.curProfile]["items"][item];
 		
-		Object.keys(profiles[curProfile]["items"]).forEach(function(item) {
-			newItemList.push({
-				name: item,
-				count: profiles[curProfile]["items"][item]
-			})
-		});
+		this.refreshItemList(newProfiles);
 		
 		this.setState({
-			itemList: newItemList
+			profiles: newProfiles
 		});
+		
+		AsyncStorage.setItem('profiles', JSON.stringify(this.state.profiles))
+	}
+	
+	componentDidMount() {
+		this.refreshItemList(this.state.profiles);
 	}
 	
 	/*
@@ -131,9 +154,11 @@ export default class ProfileScreen extends React.Component {
 								this.state.profiles[this.state.curProfile]["items"][item.name])}
 							addFunc={() => this.addCount(item.name,
 								this.state.profiles[this.state.curProfile]["items"][item.name])}
+							delFunc={() => this.deleteItem(item.name)}
 						/>
 					)}
-					keyExtractor={(item, index)=> "$" + index}
+					extraData={this.state}
+					keyExtractor={(item, index)=> item.name}
 					ItemSeparatorComponent={() => (
 						<View style={styles.itemSeparator} />
 					)}
